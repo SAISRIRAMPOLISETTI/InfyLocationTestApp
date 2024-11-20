@@ -1,7 +1,7 @@
 package com.infy.location.test.app.storage
 
 import android.content.Context
-import com.infy.location.test.app.models.CarAlgorithmData
+import com.infy.location.test.app.models.CarAPIResultData
 
 // DataStorage is responsible to save and load location data.
 class DataStorage(context: Context) {
@@ -13,7 +13,7 @@ class DataStorage(context: Context) {
         context.getSharedPreferences("CarLocationDataStorage", Context.MODE_PRIVATE)
 
     // Method to save location data
-    fun saveLocationData(carModel: String?, locationData: ArrayList<CarAlgorithmData>?) {
+    fun saveLocationData(carModel: String?, locationData: ArrayList<CarAPIResultData>?) {
         val editor = sharedPreferences.edit()
         // Save processed location list data.
         // or can save entire raw algorithm data.
@@ -23,7 +23,7 @@ class DataStorage(context: Context) {
     }
 
     // Method to load location data.
-    fun loadLocationData(carModel: String): List<CarAlgorithmData> {
+    fun loadLocationData(carModel: String): List<CarAPIResultData> {
         // Get saved location data using car model
         // convert string format data to List using GSON
         val data = sharedPreferences.getString(carModel, null) ?: return emptyList()

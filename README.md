@@ -31,3 +31,8 @@ The LocationDataFilter class processes and filters location data received in str
 JSON. It parses the data and maps it to the CarAlgorithmData model. The class organizes the data
 into categories like historical sites, hotels, and places of interest. All processed data is
 returned as a unified list.
+
+#Assumption
+The process involves analyzing car location changes by using latitude and longitude values to
+evaluate raw location data based on time intervals and distances. The results will be processed and
+stored, and when requested by the user, the data will be displayed.

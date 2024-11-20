@@ -16,13 +16,12 @@ class MainActivity : AppCompatActivity() {
     private var carManager: CARManager? = null
     private var carModel: String? = null
     private var dataStorage: DataStorage? = null
-    private var carModelAlgorithm: String? = null
 
     private var locationManager: LocationManager? = null
     private val locationListener = LocationListener { location ->
         // Handle location updates
-        // sending location data model[i.e latitude and longitude] to filtering algorithm.
-        val locationResult = carManager?.sendRawLocationDataToFilteringAlgorithm(
+        // sending location data model[i.e latitude and longitude] to filtering algorithm or API.
+        val locationResult = carManager?.sendRawLocationDataToFilteringAPI(
             CarLocationData(
                 carModel,
                 location.latitude,
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 System.currentTimeMillis()
             )
         )
-        // process filtering algorithm result
+        // process filtering algorithm/API result
         val locationDetails = carManager?.processLocationResult(locationResult)
         // save location data
         dataStorage?.saveLocationData(carModel, locationDetails)
@@ -45,8 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         // Get current CAR model using car ID.
         carModel = carManager?.getCarID()?.let { carManager?.getCarModel(it) } ?: ""
-        carModelAlgorithm = carManager?.fetchAlgorithmForCarModel(carModel)
-        carManager?.loadLocationDataAlgorithm(carModelAlgorithm)
 
         // User clicks button or some another way to start storing data based on location.
         // Below steps will execute after user interaction.
